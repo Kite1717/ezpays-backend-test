@@ -1,14 +1,14 @@
-import Koa from "koa";
-import bodyParser from "koa-bodyparser";
-import helmet from "koa-helmet";
-import cors from "@koa/cors";
-import winston from "winston";
-import "reflect-metadata";
+import Koa from 'koa';
+import bodyParser from 'koa-bodyparser';
+import helmet from 'koa-helmet';
+import cors from '@koa/cors';
+import winston from 'winston';
+import 'reflect-metadata';
 
-import { logger } from "./logger";
-import { config } from "./config";
-import { unprotectedRouter } from "./unprotectedRoutes";
-import { protectedRouter } from "./protectedRoutes";
+import { logger } from './logger';
+import { config } from './config';
+import { unprotectedRouter } from './unprotectedRoutes';
+import { protectedRouter } from './protectedRoutes';
 
 const app = new Koa();
 
@@ -17,17 +17,12 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "cdnjs.cloudflare.com"],
-      styleSrc: [
-        "'self'",
-        "'unsafe-inline'",
-        "cdnjs.cloudflare.com",
-        "fonts.googleapis.com",
-      ],
-      fontSrc: ["'self'", "fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "online.swagger.io", "validator.swagger.io"],
+      scriptSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com'],
+      styleSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com', 'fonts.googleapis.com'],
+      fontSrc: ["'self'", 'fonts.gstatic.com'],
+      imgSrc: ["'self'", 'data:', 'online.swagger.io', 'validator.swagger.io'],
     },
-  })
+  }),
 );
 
 // Enable cors with default options
@@ -36,8 +31,14 @@ app.use(cors());
 // Logger middleware -> use winston as logger (logging.ts with config)
 app.use(logger(winston));
 
-// Enable bodyParser with default options
-app.use(bodyParser());
+// Enable bodyParser
+app.use(
+  bodyParser({
+    onerror: function (_, ctx) {
+      ctx.throw('body parse error', 422);
+    }
+  }),
+);
 
 // these routes are NOT protected by the JWT middleware, also include middleware to respond with "Method Not Allowed - 405".
 app.use(unprotectedRouter.routes()).use(unprotectedRouter.allowedMethods());
