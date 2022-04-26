@@ -1,14 +1,14 @@
+require('dotenv').config({ path: '.env' });
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import helmet from 'koa-helmet';
 import cors from '@koa/cors';
 import winston from 'winston';
 import 'reflect-metadata';
-
 import { logger } from './logger';
-import { config } from './config';
 import { unprotectedRouter } from './unprotectedRoutes';
 import { protectedRouter } from './protectedRoutes';
+import config from './config';
 
 const app = new Koa();
 
@@ -36,7 +36,7 @@ app.use(
   bodyParser({
     onerror: function (_, ctx) {
       ctx.throw('body parse error', 422);
-    }
+    },
   }),
 );
 
