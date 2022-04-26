@@ -34,6 +34,7 @@ app.use(logger(winston));
 // Enable bodyParser
 app.use(
   bodyParser({
+    jsonLimit: '10mb',
     onerror: function (_, ctx) {
       ctx.throw('body parse error', 422);
     },
