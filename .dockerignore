@@ -2,9 +2,9 @@ node_modules
 Dockerfile
 .dockerignore
 .github
-dist
+build
 .example.env
 docker-compose.yml
 LICENSE
 README.md
-postman-api
+integrationtests

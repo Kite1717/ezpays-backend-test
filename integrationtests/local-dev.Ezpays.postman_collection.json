@@ -56,7 +56,9 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
 					"body": "{\n    \"statusCode\": 200,\n    \"message\": \"File content is valid.\",\n    \"data\": {\n        \"error\": false,\n        \"content\": [\n            {\n                \"user\": \"test\",\n                \"amount\": 434\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            }\n        ]\n    }\n}"
@@ -86,10 +88,12 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
+					"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+					"code": 422,
+					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
-					"body": "{\n    \"statusCode\": 400,\n    \"message\": \"File content must be valid. Example content : {user: 'test',amount: 432} \",\n    \"data\": {\n        \"error\": true,\n        \"content\": [\n            {\n                \"user\": \"test\",\n                \"amount\": 434\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123,\n                \"ahmet\": \"test\"\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            }\n        ]\n    }\n}"
+					"body": "{\n    \"statusCode\": 422,\n    \"message\": \"File content must be valid. Example content : {user: 'test',amount: 432} \",\n    \"data\": {\n        \"error\": true,\n        \"content\": [\n            {\n                \"user\": \"test\",\n                \"amount\": 434\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123,\n                \"test\": \"asdas\"\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            }\n        ]\n    }\n}"
 				},
 				{
 					"name": "json file content is not array",
@@ -116,10 +120,12 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
+					"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+					"code": 422,
+					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
-					"body": "{\n    \"statusCode\": 400,\n    \"message\": \"Content must be array.\",\n    \"data\": {\n        \"error\": true\n    }\n}"
+					"body": "{\n    \"statusCode\": 422,\n    \"message\": \"Content must be array.\",\n    \"data\": {\n        \"error\": true\n    }\n}"
 				},
 				{
 					"name": "invalid file type",
@@ -146,7 +152,9 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
+					"status": "Unsupported Media Type",
+					"code": 415,
+					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
 					"body": "{\n    \"statusCode\": 415,\n    \"message\": \"Invalid file type.\",\n    \"data\": null\n}"

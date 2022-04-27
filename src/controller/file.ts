@@ -9,7 +9,7 @@ export default class FileController {
       const fileContent: any = JSON.parse(ctx.file.buffer.toString());
       const validateResult: ValidatorResponse = contentValidator(fileContent);
       if (!validateResult.isValid) {
-        new HResponse(400, validateResult.message, {
+        new HResponse(422, validateResult.message, {
           error: true,
           content: fileContent,
         }).send(ctx);
@@ -20,7 +20,7 @@ export default class FileController {
         }).send(ctx);
       }
     } catch (err: any) {
-      new HResponse(500, err?.message, null).send(ctx);
+      new HResponse(400, err?.message, null).send(ctx);
     }
   }
 }

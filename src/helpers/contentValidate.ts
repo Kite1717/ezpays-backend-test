@@ -17,6 +17,6 @@ export const contentValidator = (content: any): ValidatorResponse => {
     isValid: flag,
     message: flag
       ? "File content is valid."
-      : "File content must be valid. Example content : {user: 'test',amount: 432} ",
+      : "File content must be valid. Example content : {user: 'test',amount: 432}.",
   };
 };
