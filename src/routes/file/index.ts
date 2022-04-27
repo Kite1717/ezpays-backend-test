@@ -1,9 +1,9 @@
-import Router from "@koa/router";
-import { file } from "../../controller";
-import { upload } from "../../helpers/fileUpload";
+import Router from '@koa/router';
+import { file } from '../../controller';
+import { handleJsonFile } from '../../helpers/fileUpload';
 
 const router = new Router();
 
 // file routes
-router.post("/file", upload.single("file"), file.readJsonFile);
+router.post('/file', handleJsonFile, file.readJsonFile);
 export default router;

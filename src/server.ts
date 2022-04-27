@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-import Koa from "koa";
+import 'dotenv/config'
+import Koa, { Context } from "koa";
 import bodyParser from "koa-bodyparser";
 import helmet from "koa-helmet";
 import cors from "@koa/cors";
@@ -10,8 +10,6 @@ import { logger } from "./logger";
 import config from "./config";
 import fileRoutes from "./routes/file";
 import generalRoutes from "./routes/general";
-
-dotenv.config({ path: ".env" });
 
 const app = new Koa();
 
@@ -36,6 +34,7 @@ app.use(
 
 app.use(fileRoutes.routes()).use(fileRoutes.allowedMethods());
 app.use(generalRoutes.routes()).use(generalRoutes.allowedMethods());
+
 
 app.listen(config.port, () => {
   console.log(`Server running on port ${config.port}`);

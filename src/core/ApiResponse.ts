@@ -26,13 +26,6 @@ abstract class ApiResponse {
   public send(ctx: Context): Context {
     return this.prepare<ApiResponse>(ctx, this);
   }
-
-  private static sanitize<T extends ApiResponse>(response: T): T {
-    const clone: T = {} as T;
-    Object.assign(clone, response);
-    for (const i in clone) if (typeof clone[i] === "undefined") delete clone[i];
-    return clone;
-  }
 }
 
 export class HResponse<T> extends ApiResponse {
