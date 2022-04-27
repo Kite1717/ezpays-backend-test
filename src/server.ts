@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import "dotenv/config";
 import Koa, { Context } from "koa";
 import bodyParser from "koa-bodyparser";
 import helmet from "koa-helmet";

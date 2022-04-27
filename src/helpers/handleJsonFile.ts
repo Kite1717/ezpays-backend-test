@@ -1,6 +1,6 @@
-import multer from '@koa/multer';
-import { Context, Next } from 'koa';
-import { HResponse } from '../core/ApiResponse';
+import multer from "@koa/multer";
+import { Context, Next } from "koa";
+import { HResponse } from "../core/ApiResponse";
 
 //Options to limit file size and file extension
 const jsonUpload = multer({
@@ -9,11 +9,11 @@ const jsonUpload = multer({
   },
   fileFilter(_, file, cb) {
     if (!file.originalname.match(/\.(json)$/)) {
-      return cb(new Error('Invalid file type.'), false);
+      return cb(new Error("Invalid file type."), false);
     }
     cb(null, true);
   },
-}).single('file');
+}).single("file");
 
 export const handleJsonFile = async (ctx: Context, next: Next) => {
   try {
