@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "5a61a50d-522d-4e22-83a0-b8244bfa54f5",
+		"name": "Ezpays",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "process file",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/mustafafiratyilmaz/Desktop/test.json"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/file",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"file"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "valid json file content",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/mustafafiratyilmaz/Desktop/test.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/file",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"file"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 200,\n    \"message\": \"File content is valid.\",\n    \"data\": {\n        \"error\": false,\n        \"content\": [\n            {\n                \"user\": \"test\",\n                \"amount\": 434\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "not valid file content",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/mustafafiratyilmaz/Desktop/test.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/file",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"file"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 400,\n    \"message\": \"File content must be valid. Example content : {user: 'test',amount: 432} \",\n    \"data\": {\n        \"error\": true,\n        \"content\": [\n            {\n                \"user\": \"test\",\n                \"amount\": 434\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123,\n                \"ahmet\": \"test\"\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            },\n            {\n                \"user\": \"test2\",\n                \"amount\": 123\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "json file content is not array",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/mustafafiratyilmaz/Desktop/test.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/file",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"file"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 400,\n    \"message\": \"Content must be array.\",\n    \"data\": {\n        \"error\": true\n    }\n}"
+				},
+				{
+					"name": "invalid file type",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/mustafafiratyilmaz/Desktop/test.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/file",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"file"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 415,\n    \"message\": \"Invalid file type.\",\n    \"data\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "api-health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/health",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "api-health",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/health",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"status\": \"UP\",\n    \"checks\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "home",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "Hello"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
