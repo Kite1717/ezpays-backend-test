@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-types */
-import { Response } from 'express';
+import { Context } from 'koa';
 
 enum ResponseStatus {
   SUCCESS = 200,
@@ -18,12 +17,14 @@ abstract class ApiResponse {
     protected data?: object | undefined | null,
   ) {}
 
-  protected prepare<T extends ApiResponse>(res: Response, response: T): Response {
-    return res.status(this.statusCode).json(ApiResponse.sanitize(response));
+  protected prepare<T extends ApiResponse>(ctx: Context, response: T): Context {
+    ctx.status = this.statusCode;
+    ctx.body = response;
+    return ctx;
   }
 
-  public send(res: Response): Response {
-    return this.prepare<ApiResponse>(res, this);
+  public send(ctx: Context): Context {
+    return this.prepare<ApiResponse>(ctx, this);
   }
 
   private static sanitize<T extends ApiResponse>(response: T): T {
@@ -37,35 +38,22 @@ abstract class ApiResponse {
 
 export class HResponse<T> extends ApiResponse {
   constructor(statusCode: number, message: string, data: any) {
-    super(
-      (statusCode = statusCode === 204 ? 200 : statusCode),
-      (message = data
-        ? data.message || data.error || data.errorMessage
-          ? data.message || data.error || data.errorMessage
-          : message
-        : message
-        ? message
-        : null),
-      (data = data),
-    );
+    super((statusCode = statusCode === 204 ? 200 : statusCode), message, data);
   }
 
-  send(res: Response): Response {
-    return super.prepare<HResponse<T>>(res, this);
+  send(ctx: Context): Context {
+    return super.prepare<HResponse<T>>(ctx, this);
   }
 }
 
 export class NotFoundResponse extends ApiResponse {
-  private url: string | undefined;
-
   constructor(message = 'Not Found') {
     super(ResponseStatus.NOT_FOUND, message);
   }
 
-  send(res: Response): Response {
-    this.url = res.req?.originalUrl;
+  send(ctx: Context): Context {
     this.data = null;
-    return super.prepare<NotFoundResponse>(res, this);
+    return super.prepare<NotFoundResponse>(ctx, this);
   }
 }
 

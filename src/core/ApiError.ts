@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Context } from 'koa';
 import { nodeEnvironment } from '../config/envVariables';
 import {
   InternalErrorResponse,
@@ -21,22 +21,22 @@ export abstract class ApiError extends Error {
     super(type);
   }
 
-  public static handle(err: ApiError, res: Response): Response {
+  public static handle(err: ApiError, ctx: Context): Context {
     switch (err.type) {
       case ErrorType.TOKEN_EXPIRED:
-        return new AuthFailureResponse(err.message).send(res);
+        return new AuthFailureResponse(err.message).send(ctx);
       case ErrorType.INTERNAL:
-        return new InternalErrorResponse(err.message).send(res);
+        return new InternalErrorResponse(err.message).send(ctx);
       case ErrorType.NOT_FOUND:
-        return new NotFoundResponse(err.message).send(res);
+        return new NotFoundResponse(err.message).send(ctx);
       case ErrorType.BAD_REQUEST:
-        return new BadRequestResponse(err.message).send(res);
+        return new BadRequestResponse(err.message).send(ctx);
         case ErrorType.FORBIDDEN:
-          return new ForbiddenResponse(err.message).send(res);
+          return new ForbiddenResponse(err.message).send(ctx);
       default: {
         let message = err.message;
         if (nodeEnvironment === 'production') message = 'Something wrong happened.';
-        return new InternalErrorResponse(message).send(res);
+        return new InternalErrorResponse(message).send(ctx);
       }
     }
   }
