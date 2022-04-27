@@ -1,6 +1,6 @@
 import Router from '@koa/router';
 import { file } from '../../controller';
-import { handleJsonFile } from '../../helpers/fileUpload';
+import { handleJsonFile } from '../../helpers/handleJsonFile';
 
 const router = new Router();
 

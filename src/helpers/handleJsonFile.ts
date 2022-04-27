@@ -9,7 +9,7 @@ const jsonUpload = multer({
   },
   fileFilter(_, file, cb) {
     if (!file.originalname.match(/\.(json)$/)) {
-      return cb(new Error('Invalid file type'), false);
+      return cb(new Error('Invalid file type.'), false);
     }
     cb(null, true);
   },
@@ -19,6 +19,6 @@ export const handleJsonFile = async (ctx: Context, next: Next) => {
   try {
     await jsonUpload(ctx, next);
   } catch (e: any) {
-    new HResponse(415, e?.message, null).send(ctx);
+    new HResponse(415, e?.message, {error:true}).send(ctx);
   }
 };

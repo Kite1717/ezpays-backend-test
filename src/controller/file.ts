@@ -20,7 +20,6 @@ export default class FileController {
         }).send(ctx);
       }
     } catch (err: any) {
-      console.log('test');
       new HResponse(500, err?.message, null).send(ctx);
     }
   }
