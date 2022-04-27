@@ -6,15 +6,14 @@ import cors from '@koa/cors';
 import winston from 'winston';
 import 'reflect-metadata';
 import { logger } from './logger';
-import { unprotectedRouter } from './unprotectedRoutes';
-import { protectedRouter } from './protectedRoutes';
+
 import config from './config';
+import fileRoutes from './routes/file';
+import generalRoutes from './routes/general';
 
 const app = new Koa();
 
-declare global {
- 
-}
+declare global {}
 // Provides important security headers to make your app more secure
 app.use(
   helmet.contentSecurityPolicy({
@@ -44,11 +43,8 @@ app.use(
   }),
 );
 
-// these routes are NOT protected by the JWT middleware, also include middleware to respond with "Method Not Allowed - 405".
-app.use(unprotectedRouter.routes()).use(unprotectedRouter.allowedMethods());
-
-// These routes are protected by the JWT middleware, also include middleware to respond with "Method Not Allowed - 405".
-app.use(protectedRouter.routes()).use(protectedRouter.allowedMethods());
+app.use(fileRoutes.routes()).use(fileRoutes.allowedMethods());
+app.use(generalRoutes.routes()).use(generalRoutes.allowedMethods());
 
 app.listen(config.port, () => {
   console.log(`Server running on port ${config.port}`);
