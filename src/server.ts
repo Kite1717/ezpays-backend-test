@@ -1,19 +1,20 @@
-require('dotenv').config({ path: '.env' });
-import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
-import helmet from 'koa-helmet';
-import cors from '@koa/cors';
-import winston from 'winston';
-import 'reflect-metadata';
-import { logger } from './logger';
+import dotenv from "dotenv";
+import Koa from "koa";
+import bodyParser from "koa-bodyparser";
+import helmet from "koa-helmet";
+import cors from "@koa/cors";
+import winston from "winston";
+import "reflect-metadata";
+import { logger } from "./logger";
 
-import config from './config';
-import fileRoutes from './routes/file';
-import generalRoutes from './routes/general';
+import config from "./config";
+import fileRoutes from "./routes/file";
+import generalRoutes from "./routes/general";
+
+dotenv.config({ path: ".env" });
 
 const app = new Koa();
 
-declare global {}
 // Provides important security headers
 app.use(helmet());
 
@@ -26,9 +27,9 @@ app.use(logger(winston));
 // Enable bodyParser
 app.use(
   bodyParser({
-    jsonLimit: '10mb',
+    jsonLimit: "10mb",
     onerror: function (_, ctx) {
-      ctx.throw('body parse error', 422);
+      ctx.throw("body parse error", 422);
     },
   }),
 );

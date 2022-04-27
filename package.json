@@ -12,7 +12,9 @@
     "start": "npm run serve",
     "test": "jest",
     "test:coverage": "jest --collect-coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "yaml": "yamllint docker-compose.yml",
+    "docker": "docker-compose -f docker-compose.yml up --build"
   },
   "engines": {
     "node": "16.x.x",
@@ -39,7 +41,8 @@
     "nodemon": "^2.0.15",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "yaml-lint": "^1.6.0"
   },
   "dependencies": {
     "@koa/cors": "^3.3.0",

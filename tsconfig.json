@@ -64,10 +64,6 @@
     "experimentalDecorators": true,           /* Enables experimental support for ES7 decorators. */
     "emitDecoratorMetadata": true,            /* Enables experimental support for emitting type metadata for decorators. */
     "skipLibCheck": true,
-
-
-
-    "emitDeclarationOnly": true,
     // go to js file when using IDE functions like
     // "Go to Definition" in VSCode
     "declarationMap": true,

@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+    #Ezpays api service
+    ezpays-backend-test:
+        container_name: ezpays-backend-test
+        build: .
+        ports:
+            - 8000:8000
+        environment:
+            NODE_ENV: development
+            PORT: 8000
+

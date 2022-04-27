@@ -1,4 +1,4 @@
-import multer from '@koa/multer';
+import multer from "@koa/multer";
 
 //Options to limit file size and file extension
 export const upload = multer({
@@ -7,7 +7,7 @@ export const upload = multer({
   },
   fileFilter(_, file, cb) {
     if (!file.originalname.match(/\.(json)$/)) {
-      return cb(new Error('Invalid file type'), false);
+      return cb(new Error("Invalid file type"), false);
     }
     cb(null, true);
   },

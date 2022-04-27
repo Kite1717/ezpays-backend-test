@@ -1,4 +1,4 @@
-export type HealthCheckStatus = 'UP' | 'DOWN';
+export type HealthCheckStatus = "UP" | "DOWN";
 export interface HealthCheckElement {
   id: string;
   status: HealthCheckStatus;
@@ -13,13 +13,13 @@ class HealthChecker {
 
   constructor() {
     this._health = {
-      status: 'DOWN',
+      status: "DOWN",
       checks: [],
     };
   }
 
   setElementHealth(elementHealth: HealthCheckElement): void {
-    let findIndex: number = this._health.checks.findIndex((el: HealthCheckElement) => el.id === elementHealth.id);
+    const findIndex: number = this._health.checks.findIndex((el: HealthCheckElement) => el.id === elementHealth.id);
     if (findIndex === -1) {
       this._health.checks.push(elementHealth);
     } else {
@@ -33,10 +33,10 @@ class HealthChecker {
     this._health.status = status;
   };
   private decideHealth = (): void => {
-    let find: HealthCheckElement | undefined = this._health.checks.find(
-      (el: HealthCheckElement) => el.status === 'DOWN',
+    const find: HealthCheckElement | undefined = this._health.checks.find(
+      (el: HealthCheckElement) => el.status === "DOWN",
     );
-    this._health.status = find ? 'DOWN' : 'UP';
+    this._health.status = find ? "DOWN" : "UP";
   };
   getHealth(): HealthCheck {
     return this._health;

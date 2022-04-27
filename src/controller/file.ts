@@ -1,8 +1,8 @@
-import { Context } from 'koa';
-import { validate, ValidationError } from 'class-validator';
-import { contentValidator } from '../helpers/contentValidate';
-import { ValidatorResponse } from 'file';
-import { HResponse } from '../core/ApiResponse';
+import { Context } from "koa";
+import { validate, ValidationError } from "class-validator";
+import { contentValidator } from "../helpers/contentValidate";
+import { ValidatorResponse } from "file";
+import { HResponse } from "../core/ApiResponse";
 
 export default class FileController {
   public static async readJsonFile(ctx: Context): Promise<void> {
@@ -10,7 +10,7 @@ export default class FileController {
     try {
       fileContent = JSON.parse(ctx.file.buffer.toString());
     } catch (e: any) {
-      new HResponse(422, 'File parse error', { errors: [e.message] }).send(ctx);
+      new HResponse(422, "File parse error", { errors: [e.message] }).send(ctx);
     }
     try {
       const validateResult: ValidatorResponse = contentValidator(fileContent);

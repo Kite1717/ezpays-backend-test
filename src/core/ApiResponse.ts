@@ -1,4 +1,4 @@
-import { Context } from 'koa';
+import { Context } from "koa";
 
 enum ResponseStatus {
   SUCCESS = 200,
@@ -30,8 +30,7 @@ abstract class ApiResponse {
   private static sanitize<T extends ApiResponse>(response: T): T {
     const clone: T = {} as T;
     Object.assign(clone, response);
-    // @ts-ignore
-    for (const i in clone) if (typeof clone[i] === 'undefined') delete clone[i];
+    for (const i in clone) if (typeof clone[i] === "undefined") delete clone[i];
     return clone;
   }
 }
@@ -47,7 +46,7 @@ export class HResponse<T> extends ApiResponse {
 }
 
 export class NotFoundResponse extends ApiResponse {
-  constructor(message = 'Not Found') {
+  constructor(message = "Not Found") {
     super(ResponseStatus.NOT_FOUND, message);
   }
 
@@ -58,25 +57,25 @@ export class NotFoundResponse extends ApiResponse {
 }
 
 export class BadRequestResponse extends ApiResponse {
-  constructor(message = 'Bad Parameters') {
+  constructor(message = "Bad Parameters") {
     super(ResponseStatus.BAD_REQUEST, message);
   }
 }
 
 export class InternalErrorResponse extends ApiResponse {
-  constructor(message = 'Internal Error') {
+  constructor(message = "Internal Error") {
     super(ResponseStatus.INTERNAL_ERROR, message);
   }
 }
 
 export class AuthFailureResponse extends ApiResponse {
-  constructor(message = 'Authentication Failure') {
+  constructor(message = "Authentication Failure") {
     super(ResponseStatus.UNAUTHORIZED, message);
   }
 }
 
 export class ForbiddenResponse extends ApiResponse {
-  constructor(message = 'Forbidden') {
+  constructor(message = "Forbidden") {
     super(ResponseStatus.FORBIDDEN, message);
   }
 }

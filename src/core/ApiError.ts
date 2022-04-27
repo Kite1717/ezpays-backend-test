@@ -1,23 +1,23 @@
-import { Context } from 'koa';
-import { nodeEnvironment } from '../config/envVariables';
+import { Context } from "koa";
+import { nodeEnvironment } from "../config/envVariables";
 import {
   InternalErrorResponse,
   NotFoundResponse,
   BadRequestResponse,
   AuthFailureResponse,
   ForbiddenResponse
-} from './ApiResponse';
+} from "./ApiResponse";
 
 enum ErrorType {
-  INTERNAL = 'InternalError',
-  NOT_FOUND = 'NotFoundError',
-  BAD_REQUEST = 'BadRequestError',
-  TOKEN_EXPIRED = 'TokenExpiredError',
+  INTERNAL = "InternalError",
+  NOT_FOUND = "NotFoundError",
+  BAD_REQUEST = "BadRequestError",
+  TOKEN_EXPIRED = "TokenExpiredError",
   FORBIDDEN="ForbiddenError"
 }
 
 export abstract class ApiError extends Error {
-  constructor(public type: ErrorType, public message: string = 'error') {
+  constructor(public type: ErrorType, public message: string = "error") {
     super(type);
   }
 
@@ -35,7 +35,7 @@ export abstract class ApiError extends Error {
           return new ForbiddenResponse(err.message).send(ctx);
       default: {
         let message = err.message;
-        if (nodeEnvironment === 'production') message = 'Something wrong happened.';
+        if (nodeEnvironment === "production") message = "Something wrong happened.";
         return new InternalErrorResponse(message).send(ctx);
       }
     }
@@ -43,31 +43,31 @@ export abstract class ApiError extends Error {
 }
 
 export class InternalError extends ApiError {
-  constructor(message = 'Internal error') {
+  constructor(message = "Internal error") {
     super(ErrorType.INTERNAL, message);
   }
 }
 
 export class BadRequestError extends ApiError {
-  constructor(message = 'Bad Request') {
+  constructor(message = "Bad Request") {
     super(ErrorType.BAD_REQUEST, message);
   }
 }
 
 export class NotFoundError extends ApiError {
-  constructor(message = 'Not Found') {
+  constructor(message = "Not Found") {
     super(ErrorType.NOT_FOUND, message);
   }
 }
 
 export class TokenExpiredError extends ApiError {
-  constructor(message = 'Token is expired') {
+  constructor(message = "Token is expired") {
     super(ErrorType.TOKEN_EXPIRED, message);
   }
 }
 
 export class ForbiddenError extends ApiError {
-  constructor(message = 'Forbidden') {
+  constructor(message = "Forbidden") {
     super(ErrorType.FORBIDDEN, message);
   }
 }
