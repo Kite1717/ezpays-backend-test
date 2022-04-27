@@ -26,7 +26,7 @@ const logger = (winstonInstance: any): any  => {
         const start = new Date().getTime();
         try {
             await next();
-          } catch (err) {
+          } catch (err:any) {
             ctx.status = err.status || 500;
             ctx.body = err.message;
           }

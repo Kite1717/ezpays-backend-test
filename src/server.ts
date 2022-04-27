@@ -12,6 +12,9 @@ import config from './config';
 
 const app = new Koa();
 
+declare global {
+ 
+}
 // Provides important security headers to make your app more secure
 app.use(
   helmet.contentSecurityPolicy({

@@ -9,6 +9,6 @@ export const upload = multer({
     if (!file.originalname.match(/\.(json)$/)) {
       return cb(new Error('Invalid file type'), false);
     }
-    cb(undefined, true);
+    cb(null, true);
   },
 });
