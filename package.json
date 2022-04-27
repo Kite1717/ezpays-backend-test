@@ -25,7 +25,6 @@
   "keywords": [],
   "repository": "https://github.com/Kite1717/ezpays-backend-test",
   "devDependencies": {
-    "@types/cron": "^1.7.3",
     "@types/jest": "^27.4.1",
     "@types/koa": "2.13.4",
     "@types/koa__cors": "^3.3.0",
@@ -42,15 +41,12 @@
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3",
-    "yaml-lint": "^1.6.0",
-    "fs": "^0.0.1-security"
+    "yaml-lint": "^1.6.0"
   },
   "dependencies": {
     "@koa/cors": "^3.3.0",
     "@koa/multer": "^3.0.0",
     "@koa/router": "^10.1.1",
-    "class-validator": "^0.13.2",
-    "cron": "^1.8.2",
     "dotenv": "^16.0.0",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
